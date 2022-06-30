@@ -36,8 +36,7 @@ window.location.href="employee/index.php"</script>
 }else{
 	?>
 	<script type="text/javascript">
-	alert("Incorrect username or password.");
-	window.location.href="index.php"</script>
+	alert("Incorrect username or password.");</script>
 	<?php
 }
 }
