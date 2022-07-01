@@ -1,7 +1,6 @@
 
 <!doctype html>
 <?php
-
 session_start();
 $servername="localhost";
 $username="root";
@@ -15,8 +14,13 @@ $pass = $_POST['password'];
 $usertype=$_POST['userType'];
 $query = "SELECT * FROM `adminlogin` WHERE admin_username='".$user."' and admin_password = '".$pass."' and role='".$usertype."'";
 $result = mysqli_query($conn, $query);
-if($result){
+if($result->num_rows!=0){
 while($row=mysqli_fetch_array($result)){
+
+	$user=$_POST['username'];
+	$pass = $_POST['password'];
+	$usertype=$_POST['userType'];
+
 echo'<script type="text/javascript">alert("Log in successful as ' .$row['role'].'")</script>';
 
 }
@@ -33,12 +37,21 @@ window.location.href="employee/index.php"</script>
 <?php
 
 }
-}else{
+}
+
+else{
 	?>
 	<script type="text/javascript">
 	alert("Incorrect username or password.");</script>
 	<?php
 }
+}
+else{
+	?>
+	<script type="text/javascript">
+		alert("Username or password cannot be empty.");
+	</script>
+	<?php
 }
 $_SESSION['login'] = true;
 
