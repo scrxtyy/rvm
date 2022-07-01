@@ -105,7 +105,7 @@ $_SESSION['login'] = true;
 							</div>
 	            		</div>
 	            		<div class="form-group">
-	            			<button type="submit" name="Login" class="btn btn-primary rounded submit p-3 px-5" style="background:#A4E288!important; color:black!important;">Log In</button>
+	            			<button type="submit" name="Login" class="btn btn-primary rounded submit p-3 px-5">Log In</button>
 	            		</div>
 	          		</form>
 	        	</div>
