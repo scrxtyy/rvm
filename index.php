@@ -2,6 +2,7 @@
 <!doctype html>
 <?php
 session_start();
+$msg = "";
 $servername="192.168.1.18";
 $username="rvmmonitor";
 $password= "LEAAT32!";
@@ -41,10 +42,8 @@ window.location.href="employee/index.php"</script>
 }
 
 else{
-	?>
-	<script type="text/javascript">
-	alert("Incorrect username or password.");</script>
-	<?php
+	$msg = "Incorrect Username or password.";
+
 }
 }
 $_SESSION['login'] = true;
@@ -81,7 +80,7 @@ $_SESSION['login'] = true;
 		      		<span class="fa fa-user-o"></span>
 		      	</div>
 					<form action= "<?= $_SERVER['PHP_SELF'] ?>" method="post" class="login-form">
-						<h5 style="text-align: center; color:red;"></h5>
+						<h5 style="text-align: center; color:red;"><?php echo $msg; ?></h5>
 		      			<div class="form-group">
 		      				<input type="text" class="form-control rounded-left" name="username" placeholder="Username" required>
 		      			</div>
