@@ -46,13 +46,6 @@ else{
 	<?php
 }
 }
-else{
-	?>
-	<script type="text/javascript">
-		alert("Username or password cannot be empty.");
-	</script>
-	<?php
-}
 $_SESSION['login'] = true;
 
 ?>
