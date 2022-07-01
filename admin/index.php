@@ -153,70 +153,51 @@
                       <thead>
                         <tr>
                           <th>RVM ID</th>
-                          <th>Location</th>
-                          <th>Weight Status</th>
-                          <th>Coins Status</th>
+                          <th>Date/Time</th>
+                          <th>Weight (kg)</th>
+                          <th>Coins (PHP)</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>R1920</td>
-                          <td>CITY HALL, STA. ROSA</td>
-                          <td class="text-danger"> 68.7% </td>
-                          <td class="text-success">50.3%</td>
-                        </tr>
-                        <tr>
-                          <td>R7283</td>
-                          <td>CARMONA, CAVITE</td>
-                          <td class="text-danger"> 51.5% </td>
-                          <td class="text-success">60.6%</td>
-                        </tr>
-                        <tr>
-                          <td>R1297</td>
-                          <td>BRGY. DITA, STA. ROSA</td>
-                          <td class="text-success"> 40.6% </td>
-                          <td class="text-warning">15.9%</td>
-                        </tr>
-                        <tr>
-                          <td>R4583</td>
-                          <td>PUP STA. ROSA</td>
-                          <td class="text-success"> 20.05% </i></td>
-                          <td class="text-success">89.6%</td>
-                        </tr>
-                        <tr>
-                          <td>R3480</td>
-                          <td>BRGY. MESA HOMES, DON JOSE</td>
-                          <td class="text-success"> 11.60%</i></td>
-                          <td class="text-warning">20.56%</td>
-                        </tr>
-                        <tr>
-                          <td>R4850</td>
-                          <td>SOUTH SUPERMARKET, STA. ROSA</td>
-                          <td class="text-success"> 5.06% </td>
-                          <td class="text-success">74.89%</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  <?php 
-                    error_reporting(0);
-                        define('DBINFO', 'mysql:host=192.168.1.18;dbname=RVM001');
-                        define('DBUSER','rvmmonitor');
-                        define('DBPASS','LEAAT32!');
-                    
-                        function fetchAll($query){
-                            $con = new PDO(DBINFO, DBUSER, DBPASS);
-                            $stmt = $con->query($query);
-                            return $stmt->fetchAll();
+                        <?php
+                        //error_reporting(0);
+ 
+                        $conn = mysqli_connect("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+                        // Check connection
+                        if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
                         }
-                        function performQuery($query){
-                            $con = new PDO(DBINFO, DBUSER, DBPASS);
-                            $stmt = $con->prepare($query);
-                            if($stmt->execute()){
-                                return true;
-                            }else{
-                                return false;
+
+                            $sql = "SELECT * FROM `RVM_MonitorLog`";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                            echo "<tr><td>".$row["rvm_id"]."</td><td>".$row["date"]." ".$row["time"]."</td><td>". $row["weight_in_kg"] . "</td><td>". $row["coins_amt_php"]."</td></tr>";
                             }
-                        }
+                            echo "</tbody></table>";
+                            } else { echo "0 results"; }
+                            $conn->close();
+        
+                    
+                            define('DBINFO', 'mysql:host=192.168.1.18;dbname=RVM001');
+                            define('DBUSER','rvmmonitor');
+                            define('DBPASS','LEAAT32!');
+                        
+                            function fetchAll($query){
+                                $con = new PDO(DBINFO, DBUSER, DBPASS);
+                                $stmt = $con->query($query);
+                                return $stmt->fetchAll();
+                            }
+                            function performQuery($query){
+                                $con = new PDO(DBINFO, DBUSER, DBPASS);
+                                $stmt = $con->prepare($query);
+                                if($stmt->execute()){
+                                    return true;
+                                }else{
+                                    return false;
+                                }
+                            }
 
                     if(isset($_POST['submit'])){
                         $message = 'RVM is almost FULL';
