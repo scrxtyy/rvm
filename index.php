@@ -7,7 +7,8 @@ $username="root";
 $password="";
 $dbname="rvm test";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-echo("connection");
+//uncomment line below this to check if connection is working:
+//echo("connection");
 if(isset($_POST['Login'])){
 $user=$_POST['username'];
 $pass = $_POST['password'];
@@ -69,10 +70,8 @@ $_SESSION['login'] = true;
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">RVM MONITORING SYSTEM</h2>
-                    <p style="align-items: center;">Please enter admin/employee details.</p>
-					<p style="align-items: center;">admin: reverse32 1234</p>
-					<p style="align-items: center;">employee: rvm0001 5678</p>
+					<h2 class="heading-section" style="padding-top:0pt!important;margin-top:0pt!important;">RVM MONITORING SYSTEM</h2>
+                    <p style="align-items: center;">Please enter admin/employee details.<br>> admin: reverse32 1234<br>> employee: rvm0001 5678</p>
 				</div>
 			</div>
 			<div class="row justify-content-center">
