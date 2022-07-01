@@ -8,7 +8,7 @@ $username="rvmmonitor";
 $password= "LEAAT32!";
 $dbname="adminRVM";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-//uncomment line below this to check if connection is working:
+//uncomment line below to check if connection is working:
 //echo("connection");
 if(isset($_POST['Login'])){
 $user=$_POST['username'];

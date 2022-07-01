@@ -199,9 +199,9 @@
                     </table>
                   <?php 
                     error_reporting(0);
-                        define('DBINFO', 'mysql:host=localhost;dbname=notificationsystem');
-                        define('DBUSER','root');
-                        define('DBPASS','');
+                        define('DBINFO', 'mysql:host=192.168.1.18;dbname=RVM001');
+                        define('DBUSER','rvmmonitor');
+                        define('DBPASS','LEAAT32!');
                     
                         function fetchAll($query){
                             $con = new PDO(DBINFO, DBUSER, DBPASS);
@@ -222,9 +222,11 @@
                         $message = 'RVM is almost FULL';
                         $query ="INSERT INTO `notifications` (`id`, `type`, `message`, `status`, `date`) VALUES (NULL,'storage','$message', 'unread', CURRENT_TIMESTAMP)";
                         if(performQuery($query)){
-                            echo "<script language='javascript'>";
-                            echo "alert('Notification sent.');";
-                            echo "</script>";
+                          ?>
+                          <script language='javascript'>
+                          alert('Notification sent.');
+                          </script>
+                          <?php
                             header("location:index.php");
                         }
                     }
@@ -237,9 +239,11 @@
                       $message = 'COINS is almost EMPTY.';
                       $query ="INSERT INTO `notifications` (`id`, `type`,`message`, `status`, `date`) VALUES (NULL, 'coins','$message', 'unread', CURRENT_TIMESTAMP)";
                       if(performQuery($query)){
-                        echo "<script language='javascript'>";
-                        echo "alert('Notification sent.');";
-                        echo "</script>";
+                        ?>
+                        <script language='javascript'>
+                        alert('Notification sent.');
+                        </script>
+                        <?php
                           header("location:index.php");
                       }
                   }
