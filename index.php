@@ -2,10 +2,10 @@
 <!doctype html>
 <?php
 session_start();
-$servername="localhost";
-$username="root";
-$password="";
-$dbname="rvm test";
+$servername="192.168.1.18";
+$username="rvmmonitor";
+$password= "LEAAT32!";
+$dbname="adminRVM";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 //uncomment line below this to check if connection is working:
 //echo("connection");
@@ -13,7 +13,7 @@ if(isset($_POST['Login'])){
 $user=$_POST['username'];
 $pass = $_POST['password'];
 $usertype=$_POST['userType'];
-$query = "SELECT * FROM `adminlogin` WHERE admin_username='".$user."' and admin_password = '".$pass."' and role='".$usertype."'";
+$query = "SELECT * FROM `Employee_LogIn` WHERE usern='".$user."' and pw = '".$pass."' and role='".$usertype."'";
 $result = mysqli_query($conn, $query);
 if($result->num_rows!=0){
 while($row=mysqli_fetch_array($result)){
@@ -71,7 +71,7 @@ $_SESSION['login'] = true;
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
 					<h2 class="heading-section" style="padding-top:0pt!important;margin-top:0pt!important;">RVM MONITORING SYSTEM</h2>
-                    <p style="align-items: center;">Please enter admin/employee details.<br>> admin: reverse32 1234<br>> employee: rvm0001 5678</p>
+                    <p style="align-items: center;">Please enter admin/employee details.<br>> admin: reverse32 LEAAT32!<br>> employee: rvm0001 1234</p>
 				</div>
 			</div>
 			<div class="row justify-content-center">
