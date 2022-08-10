@@ -40,7 +40,7 @@
             <a class="nav-link" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications 
                 <?php
 
-                define('DBINFO', 'mysql:host=192.168.1.18;dbname=RVM001');
+                define('DBINFO', 'mysql:host=192.168.76.188;dbname=RVM001');
                 define('DBUSER','rvmmonitor');
                 define('DBPASS','LEAAT32!');
 
@@ -104,7 +104,7 @@
               <img src="images/faces/face28.png" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="/monitoring-website/index.php">
+              <a class="dropdown-item" href="/RVM-monitoring-website/index.php">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -122,9 +122,16 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/monitoring-website/admin/index.html">
+            <a class="nav-link" href="/RVM-monitoring-website/employee/index.php">
               <i class="ti-shield menu-icon"></i>
               <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/RVM-monitoring-website/employee/pages/tables/rvm-monitor.php">
+              <i class="ti-view-list-alt menu-icon"></i>
+              <span class="menu-title">RVM1 Information</span>
             </a>
           </li>
         </ul>
@@ -202,55 +209,35 @@
                 <div class="card-body">
                   <p class="card-title mb-0">Monitor</p>
                   <div class="table-responsive">
-                    <table class="table table-hover">
+                  <table class="table table-hover">
                       <thead>
                         <tr>
                           <th>RVM ID</th>
-                          <th>Location</th>
-                          <th>Weight Status</th>
-                          <th>Coins Status</th>
+                          <th>Date/Time</th>
+                          <th>Latest Plastic Storage Weight</th>
+                          <th>Latest Tin Can Storage Weight</th>
+                          <th>Latest Coins Number</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>R1920</td>
-                          <td>CITY HALL, STA. ROSA</td>
-                          <td class="text-danger"> 68.7% </td>
-                          <td class="text-success">50.3%</td>
-                        </tr>
-                        <tr>
-                          <td>R7283</td>
-                          <td>CARMONA, CAVITE</td>
-                          <td class="text-danger"> 51.5% </td>
-                          <td class="text-success">60.6%</td>
-                        </tr>
-                        <tr>
-                          <td>R1297</td>
-                          <td>BRGY. DITA, STA. ROSA</td>
-                          <td class="text-success"> 40.6% </td>
-                          <td class="text-warning">15.9%</td>
-                        </tr>
-                        <tr>
-                          <td>R4583</td>
-                          <td>PUP STA. ROSA</td>
-                          <td class="text-success"> 20.05% </i></td>
-                          <td class="text-success">89.6%</td>
-                        </tr>
-                        <tr>
-                          <td>R3480</td>
-                          <td>BRGY. MESA HOMES, DON JOSE</td>
-                          <td class="text-success"> 11.60%</i></td>
-                          <td class="text-warning">20.56%</td>
-                        </tr>
-                        <tr>
-                          <td>R4850</td>
-                          <td>SOUTH SUPERMARKET, STA. ROSA</td>
-                          <td class="text-success"> 5.06% </td>
-                          <td class="text-success">74.89%</td>
+                          <?php
+                          $mysqli = new mysqli("192.168.76.188", "rvmmonitor", "LEAAT32!", "adminRVM");
+    
+                          $result6 = $mysqli->query("SELECT * FROM RVM_Information where rvm_id=1");
+                            while($row6 = $result6->fetch_assoc()){
+                              $result7 = $mysqli->query("SELECT * FROM `RVM_MonitorLog` WHERE rvm_id= 1");
+                                  while($row7 = $result7->fetch_assoc()){
+                                    echo "<tr><td>".$row7['rvm_id']."</td>
+                                      <td>".$row7['date']." ".$row7['time']."</td><td>".$row7['pet_weight']." KG</td><td>".$row7['tincan_weight']." KG</td><td>".$row7['coins_amt_php'].
+                                      " PHP</td>";
+                                  }
+                            }
+                                  ?>
                         </tr>
                       </tbody>
                     </table>
-                    <button class="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block" type="button"> View all </button>
+                    <button class="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block" type="button"><a href="/RVM-monitoring-website/employee/pages/tables/rvm-monitor.php"> View all </a></button>
                   </div>
                 </div>
               </div>

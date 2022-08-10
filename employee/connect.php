@@ -1,6 +1,8 @@
 <?php
 
-    define('DBINFO', 'mysql:host=192.168.1.18;dbname=RVM001');
+    $mysqli = new mysqli("192.168.76.188", "rvmmonitor", "LEAAT32!", "adminRVM");
+
+    define('DBINFO', 'mysql:host=192.168.76.188;dbname=adminRVM');
     define('DBUSER','rvmmonitor');
     define('DBPASS','LEAAT32!');
 

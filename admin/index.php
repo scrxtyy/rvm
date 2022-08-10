@@ -39,7 +39,7 @@
               <img src="images/faces/face28.png" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="/monitoring-website/index.php">
+              <a class="dropdown-item" href="/RVM-monitoring-website/index.php">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -57,21 +57,27 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/monitoring-website/admin/index.php">
+            <a class="nav-link" href="/RVM-monitoring-website/admin/index.php">
               <i class="ti-shield menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/monitoring-website/admin/pages/forms/basic_elements.html">
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="../../pages/forms/basic_elements.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Registration Forms</span>
             </a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="/RVM-monitoring-website/admin/pages/tables/rvms.php">
+              <i class="ti-view-list-alt menu-icon"></i>
+              <span class="menu-title">RVM Information</span>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/monitoring-website/admin/pages/tables/basic-table.html">
+            <a class="nav-link" href="/RVM-monitoring-website/admin/pages/tables/employeetable.php">
               <i class="ti-view-list-alt menu-icon"></i>
-              <span class="menu-title">Informations</span>
+              <span class="menu-title">Employees</span>
             </a>
           </li>
         </ul>
@@ -144,17 +150,17 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-7 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title mb-0">Monitor</p>
+                  <p class="card-title mb-0">Latest Updates</p>
                   <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
                         <tr>
                           <th>RVM ID</th>
                           <th>Date/Time</th>
-                          <th>Weight (kg)</th>
+                          <th>Platic Storage Weight (kg)</th>
+                          <th>TinCan Storage Weight (kg)</th>
                           <th>Coins (PHP)</th>
                         </tr>
                       </thead>
@@ -162,25 +168,25 @@
                         <?php
                         //error_reporting(0);
  
-                        $conn = mysqli_connect("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+                        $conn = mysqli_connect("192.168.76.188", "rvmmonitor", "LEAAT32!", "adminRVM");
                         // Check connection
                         if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                         }
 
-                            $sql = "SELECT * FROM `RVM_MonitorLog`";
+                            $sql = "SELECT * FROM `RVM_MonitorLog` ORDER BY log_id DESC";
                             $result = $conn->query($sql);
                             if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
-                            echo "<tr><td>".$row["rvm_id"]."</td><td>".$row["date"]." ".$row["time"]."</td><td>". $row["weight_in_kg"] . "</td><td>". $row["coins_amt_php"]."</td></tr>";
+                            echo "<tr><td>".$row["rvm_id"]."</td><td>".$row["date"]." ".$row["time"]."</td><td>". $row["pet_weight"] . "</td><td>". $row["tincan_weight"] . "</td><td>". $row["coins_amt_php"]."</td></tr>";
                             }
                             echo "</tbody></table>";
                             } else { echo "0 results"; }
                             $conn->close();
         
                     
-                            define('DBINFO', 'mysql:host=192.168.1.18;dbname=RVM001');
+                            define('DBINFO', 'mysql:host=192.168.76.188;dbname=RVM001');
                             define('DBUSER','rvmmonitor');
                             define('DBPASS','LEAAT32!');
                         
@@ -236,42 +242,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-5 grid-margin stretch-card">
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title">To Do Lists</h4>
-									<div class="list-wrapper pt-2">
-										<ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-											<li>
-												<div class="form-check form-check-flat">
-													<label class="form-check-label">
-														<input class="checkbox" type="checkbox">
-													Refill BRGY. DITA COINS
-													</label>
-												</div>
-												<i class="remove ti-trash"></i>
-											</li>
-											<li class="completed">
-												<div class="form-check form-check-flat">
-													<label class="form-check-label">
-														<input class="checkbox" type="checkbox" checked>
-														Submit report on PUP Sta. Rosa RVM
-													</label>
-												</div>
-												<i class="remove ti-trash"></i>
-											</li>
-										</ul>
-                  </div>
-                  <div class="add-items d-flex mb-0 mt-4">
-										<input type="text" class="form-control todo-list-input me-2"  placeholder="Add new task">
-										<button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="ti-location-arrow"></i></button>
-									</div>
-								</div>
-							</div>
-            </div>
-          </div>
-          <div class="row">
+            
+          <div class="row" style="margin-top:50pt!important">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card position-relative">
                 <div class="card-body">
