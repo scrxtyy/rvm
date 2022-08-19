@@ -3,7 +3,7 @@
 <?php
 session_start();
 $msg = "";
-$servername="192.168.76.188";
+$servername="192.168.1.14";
 $username="rvmmonitor";
 $password= "LEAAT32!";
 $dbname="adminRVM";
